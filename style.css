@@ -1,0 +1,350 @@
+
+body {
+    background-color: black;
+    color: aquamarine;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.none {
+    display: none !important;
+}
+
+
+/* ==============================
+   텍스트 애니메이션
+============================== */
+
+.focus-in-contract {
+    animation: focus-in-contract 0.7s ease-in-out both;
+}
+
+@keyframes focus-in-contract {
+    0% {
+        letter-spacing: 1em;
+        filter: blur(12px);
+        opacity: 0;
+    }
+
+    100% {
+        filter: blur(0);
+        opacity: 1;
+    }
+}
+
+
+/* ==============================
+   메인 화면 애니메이션
+============================== */
+
+@keyframes firstanimate {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(calc(-50vh + 60px));
+    }
+}
+
+@keyframes growUp {
+    from {
+        height: 0;
+    }
+
+    to {
+        height: 85vh;
+    }
+}
+
+
+/* ==============================
+   말차길드 제목
+============================== */
+
+#animate {
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 25px;
+
+    animation:
+        focus-in-contract 0.7s ease-in-out both,
+        firstanimate 1s ease-in-out 1s forwards;
+}
+
+#animate h1 {
+    margin: 0;
+}
+
+
+/* ==============================
+   메인 콘텐츠 영역
+============================== */
+
+#mains {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 0;
+    padding: 30px 20px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center 제거 */
+
+    background-color: white;
+    border-radius: 20px 20px 0 0;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: center;
+
+    animation: growUp 1s cubic-bezier(0.16, 1, 0.3, 1) 2s forwards;
+
+    scroll-behavior: smooth;
+}
+
+
+/* ==============================
+   내부 콘텐츠 박스
+============================== */
+
+.grow-up-box {
+    width: 100%;
+
+    overflow: hidden;
+
+    background-color: #3b82f6;
+    color: white;
+}
+
+
+/* ==============================
+   햄버거 메뉴 버튼
+============================== */
+
+.menu-btn {
+    position: absolute;
+    left: calc(100% + 12px);
+    top: 50%;
+
+    width: 30px;
+    height: 24px;
+    padding: 0;
+
+    border: none;
+    background: none;
+
+    cursor: pointer;
+
+    opacity: 0;
+    pointer-events: none;
+
+    transform: translate(10px, -50%);
+
+    transition:
+        opacity 0.6s ease,
+        transform 0.6s ease;
+}
+
+
+/* 메뉴 버튼 등장 */
+
+.menu-btn.show {
+    opacity: 1;
+    pointer-events: auto;
+
+    transform: translate(0, -50%);
+}
+
+
+/* 햄버거 선 공통 스타일 */
+
+.menu-btn span {
+    position: absolute;
+    left: 0;
+
+    width: 100%;
+    height: 3px;
+
+    border-radius: 2px;
+    background-color: white;
+
+    transition:
+        transform 0.3s ease,
+        top 0.3s ease,
+        opacity 0.2s ease;
+}
+
+
+/* 햄버거 선 위치 */
+
+.menu-btn span:nth-child(1) {
+    top: 0;
+}
+
+.menu-btn span:nth-child(2) {
+    top: 10px;
+}
+
+.menu-btn span:nth-child(3) {
+    top: 20px;
+}
+
+
+/* X 모양으로 전환 */
+
+.menu-btn.active span:nth-child(1) {
+    top: 10px;
+    transform: rotate(45deg);
+}
+
+.menu-btn.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-btn.active span:nth-child(3) {
+    top: 10px;
+    transform: rotate(-45deg);
+}
+
+/* 제목과 메뉴의 전환 */
+#guildTitle,
+#guildMenu {
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+}
+
+#guildTitle {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 메뉴 기본 상태 */
+#guildMenu {
+    position: absolute;
+    left: 0;
+    top: 50%;
+
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    opacity: 0;
+    transform: translateY(-50%) translateX(-10px);
+    pointer-events: none;
+    visibility: hidden;
+    white-space: nowrap;
+}
+
+/* 메뉴 링크 */
+#guildMenu a {
+    color: aquamarine;
+    text-decoration: none;
+}
+
+/* 메뉴 열림 */
+#animate.menu-open #guildTitle {
+    opacity: 0 !important;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+#animate.menu-open #guildMenu {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+    pointer-events: auto;
+    visibility: visible;
+}
+
+.dday-wrap {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 35px;
+}
+
+#dday {
+    color: #66bfa8;
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 0 0 5px rgba(102, 191, 168, 0.35);
+}
+
+
+/* 반짝이 공통 스타일 */
+.sparkle {
+    position: absolute;
+    color: #579e8b;
+    pointer-events: none;
+    animation: sparkle 2.4s ease-in-out infinite;
+}
+
+.sparkle-1 {
+    top: 0;
+    left: 5px;
+    font-size: 20px;
+}
+
+.sparkle-2 {
+    top: 8px;
+    right: 8px;
+    font-size: 15px;
+    animation-delay: 0.5s;
+}
+
+.sparkle-3 {
+    bottom: 0;
+    right: 25px;
+    font-size: 18px;
+    animation-delay: 1s;
+}
+
+.sparkle-4 {
+    bottom: 5px;
+    left: 20px;
+    font-size: 13px;
+    animation-delay: 0.8s;
+}
+
+@keyframes sparkle {
+    0%, 100% {
+        opacity: 0.2;
+        transform: scale(0.6) rotate(0deg);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2) rotate(45deg);
+    }
+}
+
+#ddayh {
+    color: #579e8b;
+}
+#exp1 {
+    color: black;
+}
+#index1 {
+    color: black;
+}

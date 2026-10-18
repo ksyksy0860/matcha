@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>말차길드 - 메인</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body class="center">
+    <div id="animate" class="focus-in-contract">
+        <h1 id="guildTitle">말차길드</h1>
+
+        <div id="guildMenu">
+            <a href="#"></a>
+            <a href="https://open.kakao.com/o/geZgBzah" target="_blank">가입문의</a>
+            <a href="#"></a>
+        </div>
+
+        <button id="menuBtn" class="menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+
+    <div id="mains" class="grow-up-box">
+        <h1 id="ddayh">말차길드 운영 시작으로부터..</h1>
+        <div class="dday-wrap">
+            <span class="sparkle sparkle-1">✦</span>
+            <span class="sparkle sparkle-2">✧</span>
+            <span class="sparkle sparkle-3">✦</span>
+            <span class="sparkle sparkle-4">✧</span>
+
+            <div id="dday">D-DAY 계산 중..</div>
+        </div>
+        <p id="exp1">로드 중..</p>
+        <p id="index1">▼ 길드 영상</p>
+        <iframe
+            src="https://www.youtube.com/embed/영상ID"
+            referrerpolicy="strict-origin-when-cross-origin"
+            width="320"
+            height="280"
+            allowfullscreen>
+        </iframe>
+    </div>
+    <script>
+        const menuBtn = document.getElementById('menuBtn');
+        const animate = document.getElementById('animate');
+
+        menuBtn.addEventListener('click', () => {
+            menuBtn.classList.toggle('active');
+            animate.classList.toggle('menu-open');
+        });
+
+        animate.addEventListener('animationend', (event) => {
+            if (event.animationName === 'firstanimate') {
+                menuBtn.classList.add('show');
+            }
+        });
+    </script>
+    <script>
+        const targetDate = new Date('2025-07-15T00:00:00+09:00');
+
+        function updateDDay() {
+            const now = new Date();
+
+            const today = new Date(
+                now.getFullYear(),
+                now.getMonth(),
+                now.getDate()
+            );
+
+            const target = new Date(
+                targetDate.getFullYear(),
+                targetDate.getMonth(),
+                targetDate.getDate()
+            );
+
+            const diff = Math.round(
+                (today - target) / (1000 * 60 * 60 * 24)
+            );
+
+            document.getElementById('dday').textContent =
+                diff > 0 ? `D+${diff}` :
+                diff === 0 ? 'D-DAY' :
+                `D${diff}`;
+        }
+        updateDDay();
+        document.getElementById('exp1').textContent =
+            '우리 말차길드는 아이베넷에게서 시작되어 많은 뉴비들에게 행운을 주었으며,'
+            +'이제 이 길드는 당신에게 와 행운을 주려 합니다.'
+            +'당장 가입신청하여 행운을 얻으세요!'
+    </script>
+</body>
+</html>
